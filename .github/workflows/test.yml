@@ -231,7 +231,9 @@ jobs:
         run: conda install -c anaconda libpython
 
       - name: Install sktime and dependencies
-        run: python -m pip install .[all_extras_pandas2,dev]
+        run: |
+          python -m pip install .[all_extras_pandas2,dev]
+          python -m pip install codecov-cli
 
       - name: Show dependencies
         run: python -m pip list
@@ -317,6 +319,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           CODECOV_STATIC_TOKEN: ${{ secrets.CODECOV_STATIC_TOKEN }}
+          GITHUB_SHA: ${{ github.sha }}
 
   test-unix-pandas1:
     needs: test-nosoftdeps
@@ -379,3 +382,4 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           CODECOV_STATIC_TOKEN: ${{ secrets.CODECOV_STATIC_TOKEN }}
+          GITHUB_SHA: ${{ github.sha }}
