@@ -57,6 +57,7 @@ dependencies = [
 all_extras = [
     "attrs",
     "cloudpickle",
+    "codecov-cli",
     "dash!=2.9.0",
     "dask",
     "dtw-python",
