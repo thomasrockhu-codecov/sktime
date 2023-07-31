@@ -27,6 +27,14 @@ jobs:
         run: build_tools/fail_on_missing_init_files.sh
         shell: bash
 
+      - name: Test things
+        run: |
+          echo $GITHUB_SHA
+          BASE_COMMIT=$(git merge-base ${GITHUB_SHA}^ origin/main)
+          echo $BASE_COMMIT
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+
   run-notebook-examples:
     needs: code-quality
     runs-on: ubuntu-latest
@@ -315,7 +323,8 @@ jobs:
         run: python -m pip list
 
       - name: Run tests
-        run: make test-ats
+        run: |
+          make test-ats
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           CODECOV_STATIC_TOKEN: ${{ secrets.CODECOV_STATIC_TOKEN }}
