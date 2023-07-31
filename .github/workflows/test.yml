@@ -262,6 +262,7 @@ jobs:
           codecovcli create-commit
           codecovcli create-report
           codecovcli static-analysis --token=${CODECOV_STATIC_TOKEN}
+          echo ${{ github.sha }}
           BASE_COMMIT=$(git merge-base ${{ github.sha }}^ origin/main)
           echo $BASE_COMMIT
           codecovcli --codecov-yml-path=codecov_cli.yml -v label-analysis --token=${CODECOV_STATIC_TOKEN} --base-sha=${BASE_COMMIT}
