@@ -30,18 +30,16 @@ test: ## Run unit tests
 	cp setup.cfg ${TEST_DIR}
 	python -m pytest
 
-test-ats: ## Run unit tests with ats
+test_ats: ## Run unit tests with ats
 	-rm -rf ${TEST_DIR}
 	mkdir -p ${TEST_DIR}
 	cp .coveragerc ${TEST_DIR}
 	cp setup.cfg ${TEST_DIR}
-
 	codecovcli create-commit
 	codecovcli create-report
 	codecovcli static-analysis --token=${CODECOV_STATIC_TOKEN}
-  echo ${GITHUB_SHA}
 	BASE_COMMIT=$(git merge-base ${GITHUB_SHA}^ origin/main)
-	echo $BASE_COMMIT
+	echo ${BASE_COMMIT}
 	codecovcli --codecov-yml-path=codecov_cli.yml -v label-analysis --token=${CODECOV_STATIC_TOKEN} --base-sha=${BASE_COMMIT}
 	codecovcli --codecov-yml-path=codecov_cli.yml do-upload --plugin pycoverage --plugin compress-pycoverage --flag smart-tests --fail-on-error
 

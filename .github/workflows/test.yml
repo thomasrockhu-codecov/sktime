@@ -330,7 +330,7 @@ jobs:
 
       - name: Run tests
         run: |
-          make test-ats
+          make test_ats
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           CODECOV_STATIC_TOKEN: ${{ secrets.CODECOV_STATIC_TOKEN }}
@@ -393,7 +393,7 @@ jobs:
         run: python -m pip list
 
       - name: Run tests
-        run: make test-ats
+        run: make test_ats
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           CODECOV_STATIC_TOKEN: ${{ secrets.CODECOV_STATIC_TOKEN }}
