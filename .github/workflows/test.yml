@@ -29,6 +29,9 @@ jobs:
 
       - name: Test things
         run: |
+          echo ${{ github.sha }}
+          OLD_BASE_COMMIT=$(git merge-base ${GITHUB_SHA}^ origin/main)
+          echo $OLD_BASE_COMMIT
           echo $GITHUB_SHA
           BASE_COMMIT=$(git merge-base ${GITHUB_SHA}^ origin/main)
           echo $BASE_COMMIT
